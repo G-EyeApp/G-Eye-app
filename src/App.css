@@ -1,0 +1,44 @@
+.hero {
+  background-image: url("./assets/images/env.png");
+  background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+height: 100vh;
+position: relative;
+/* background-attachment: fixed; */
+}
+
+
+
+/* Keyframe animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotateText {
+  from {
+    opacity: 0;
+    transform: rotate(-5deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-rotateText {
+  animation: rotateText 1s ease-out forwards;
+}
+
+
