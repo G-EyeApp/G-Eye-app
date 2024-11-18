@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 
 const environmentalFacts = [
   { 
-    fact: "Illegal mining causes X% of river pollution in affected regions.",
+    fact: "Illegal mining causes over 70% of river pollution in affected regions.",
     icon: "🌊" 
   },
   { 
-    fact: "Deforestation from illegal mining threatens Y endangered species.",
+    fact: "Deforestation from illegal mining threatens 55% endangered species.",
     icon: "🌳" 
   },
   { 
-    fact: "Mining-related emissions account for Z% of local air pollution.",
+    fact: "Mining-related emissions account for 50% of local air pollution.",
     icon: "🏭" 
   },
   { 

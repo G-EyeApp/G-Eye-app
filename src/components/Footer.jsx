@@ -9,8 +9,8 @@ const Footer = () => {
         
         {/* Logo and Description */}
         <div className="flex flex-col items-center md:items-start">
-          <img src={image} alt="App Logo" className="w-36 h-36 mb-3 bg-white" />
-          <p className="text-center md:text-left text-sm text-green-200 max-w-xs">
+          <img src={image} alt="App Logo" className="w-36 h-36 mb-3 bg-white rounded-full" />
+          <p className="text-justify md:text-left text-sm text-green-200 max-w-xs">
             Our mission is to empower communities by providing a platform for reporting illegal mining activities and safeguarding the natural environment.
           </p>
         </div>
@@ -56,7 +56,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="text-center text-sm text-green-300">
-        © {new Date().getFullYear()} YourAppName. All rights reserved.
+        © {new Date().getFullYear()} G-Eye. All rights reserved.
       </div>
     </footer>
   );

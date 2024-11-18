@@ -1,22 +1,24 @@
-
 import React from 'react';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
+import Header from '../components/Header';
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+    };
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
-      <aside className="w-1/4 bg-green-700 text-white p-4">
-        <h2 className="text-2xl font-bold mb-8">Authority Dashboard</h2>
-        <nav className="flex flex-col space-y-4">
-          <a href="#" className="hover:bg-green-600 p-2 rounded">Reports</a>
-          <a href="#" className="hover:bg-green-600 p-2 rounded">Analytics</a>
-          <a href="#" className="hover:bg-green-600 p-2 rounded">Settings</a>
-        </nav>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-8 overflow-y-auto">{children}</main>
+    <div className="dashboard-layout flex">
+    <Sidebar isSidebarOpen={setIsSidebarOpen} />
+    <div className="main-content flex-1 flex flex-col bg-[#f0fdf4]">
+      <Header className=" flex-1 flex flex-col bg-gray-100"/>
+      {/* Other components or content go here */}
+      <Outlet/>
     </div>
+  </div>
   );
 };
 

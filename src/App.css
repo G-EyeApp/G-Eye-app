@@ -1,14 +1,22 @@
-.hero {
+
+/* .hero {
   background-image: url("./assets/images/env.png");
   background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
 height: 100vh;
 position: relative;
-/* background-attachment: fixed; */
+background-attachment: fixed;
+} */
+
+.hero {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  position: relative;
+  overflow: hidden; /* Ensure video doesn't overflow */
 }
-
-
 
 /* Keyframe animations */
 @keyframes fadeInUp {
@@ -41,4 +49,16 @@ position: relative;
   animation: rotateText 1s ease-out forwards;
 }
 
+.login{
+  background-image: url(./assets/images/form.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
 
+.signup {
+  background-image: url(./assets/images/form.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

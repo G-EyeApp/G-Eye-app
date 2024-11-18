@@ -16,3 +16,20 @@ const RootLayout = ({children, headerText}) => {
 }
 
 export default RootLayout;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

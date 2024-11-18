@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import image from '../assets/images/eye.png'
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,41 +21,41 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white dark:bg-gray-900 bg-opacity-90 w-full shadow-md">
+    <nav className="bg-white dark:bg-gray-900 bg-opacity-90 w-full shadow-md z-40 fixed">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <img
-              src={image}  // Adjust this path if needed
+              src={image}  
               alt="Logo"
-              className="mt-3 w-36 h-36" // Adjust the height and width as needed
+              className="mt-3 w-36 h-36" 
             />
           </div>
 
           {/* Navbar links */}
           <div className="hidden md:flex space-x-6">
-            <a href="#home" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition">
-              Home
+            <a href="#home" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition hover:underline font-bold">
+             <Link to='/'>Home</Link> 
             </a>
-            <a href="#map" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition">
+            <a href="#map" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition hover:underline font-bold">
               Map
             </a>
-            <a href="#report" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition">
-              Report
+            <a href="#report" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition hover:underline font-bold">
+             <Link to='/submission'>Report</Link> 
             </a>
-            <a href="#dashboard" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition">
-              Dashboard
+            <a href="#dashboard" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition hover:underline font-bold">
+             <Link to='/signup'>Dashboard</Link> 
             </a>
-            <a href="#about" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition">
-              About
+            <a href="#about" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition hover:underline font-bold">
+             <Link to='/about'>About</Link> 
             </a>
           </div>
 
           {/* Action button & dark mode toggle */}
           <div className="hidden md:flex items-center space-x-4">
             <button className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition">
-              Report Now
+             <Link to='/reportform'>Report Now</Link> 
             </button>
             <button
               onClick={toggleDarkMode}
