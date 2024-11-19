@@ -58,9 +58,9 @@ const UserSubmissions = () => {
   return (
    <div>
     <Navbar />
-     <div className="flex min-h-screen bg-gray-50 mt-5">
+     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
-      <div className="w-64 bg-white p-6 border-r">
+      <div className="w-64 bg-white p-6 border-r mt-16">
         <h3 className="text-lg font-semibold mb-4">Filter Reports</h3>
         
         <div className="space-y-4">
@@ -109,7 +109,7 @@ const UserSubmissions = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-6 mt-20">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">List of Reports Submitted</h2>
           {isFiltered && (

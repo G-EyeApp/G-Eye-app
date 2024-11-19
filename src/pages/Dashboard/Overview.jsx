@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaUsers, FaTasks, FaBell, FaChartBar } from 'react-icons/fa';
 
-const CountingNumber = ({ target, duration = 9000 }) => {
+const CountingNumber = ({ target, duration = 50000 }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {

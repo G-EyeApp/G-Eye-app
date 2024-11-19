@@ -8,7 +8,7 @@ const AboutUs = () => {
       <Navbar />
       <section id="about-us" className="py-12 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-6 text-gray-800 text-center">About Us</h2>
+        <h2 className="text-4xl font-bold mb-6 text-gray-800 text-center mt-10">About Us</h2>
         <p className="text-gray-700 mb-4 text-lg leading-relaxed">
           Our mission is to combat illegal mining and its adverse effects on our communities and environment. We aim to promote sustainable practices and empower communities through education and support.
         </p>

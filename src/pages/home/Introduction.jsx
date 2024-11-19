@@ -1,8 +1,8 @@
 import React from 'react';
-import image1 from '../../assets/images/intro4.png'; // Image 1
+import image1 from '../../assets/images/stop2.jpeg'; // Image 1
 import image2 from '../../assets/images/intro5.png'; // Image 2
 import image3 from '../../assets/images/intro3.png'; // Image 3
-import image4 from '../../assets/images/intro2.jpg'; // Image 3
+import image4 from '../../assets/images/stop.jpeg'; // Image 3
 import { Link } from 'react-router-dom';
 import ImpactTrend from './User/ImpactTrend';
 
