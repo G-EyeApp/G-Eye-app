@@ -1,33 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaSearch, FaFilter, FaTimes } from 'react-icons/fa';
-
-// Enhanced dummy data
-const dummyCases = [
-    {
-        id: '001',
-        title: 'Illegal Logging Investigation',
-        agencyName: 'Agency A',
-        dateReported: '2024-11-07',
-        location: 'Forest Zone A',
-        statusUpdate: 'Under Review',
-        actionsTaken: 'Initial investigation completed.',
-        notes: 'Observations were noted during the first survey.',
-        images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150'],
-    },
-    {
-        id: '002',
-        title: 'Water Pollution Report',
-        agencyName: 'Agency B',
-        dateReported: '2024-11-06',
-        location: 'River Delta',
-        statusUpdate: 'Resolved',
-        actionsTaken: 'Issue addressed and resolved.',
-        notes: 'Final report submitted to authorities.',
-        images: ['https://via.placeholder.com/150'],
-    },
-    // Add more dummy cases as needed
-];
+import axios from 'axios';
 
 const CaseList = ({ onSelectCase }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -37,20 +11,40 @@ const CaseList = ({ onSelectCase }) => {
     const [showFilters, setShowFilters] = useState(false);
     const itemsPerPage = 6;
 
-    // Filter cases based on search term and dates
-    const filteredCases = dummyCases.filter(caseItem => {
-        const matchesSearch = caseItem.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            caseItem.id.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesDate = (!startDate || caseItem.dateReported >= startDate) &&
-                          (!endDate || caseItem.dateReported <= endDate);
+    const [reports, setReports] = useState([]);
+
+    const getAgencyReports = async () => {
+        try {
+            const token = localStorage.getItem('token'); // or however you store your token
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/agents/reports?=0`, {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Adjust this based on your API's requirements
+                },
+            });
+            setReports(response.data);
+        } catch (error) {
+            console.error("Error fetching reports:", error);
+        }
+    };
+
+    useEffect(() => {
+        getAgencyReports();
+    }, []);
+
+    // Filter reports based on search term and dates
+    const filteredReports = reports.filter(report => {
+        const matchesSearch = report.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                             report.id.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesDate = (!startDate || new Date(report.dateReported) >= new Date(startDate)) &&
+                           (!endDate || new Date(report.dateReported) <= new Date(endDate));
         return matchesSearch && matchesDate;
     });
 
     // Calculate pagination
-    const totalPages = Math.ceil(filteredCases.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredReports.length / itemsPerPage);
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredCases.slice(indexOfFirstItem, indexOfLastItem);
+    const currentItems = filteredReports.slice(indexOfFirstItem, indexOfLastItem);
 
     const resetFilters = () => {
         setSearchTerm('');
@@ -115,20 +109,19 @@ const CaseList = ({ onSelectCase }) => {
             )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {currentItems.map((caseItem) => (
+                {currentItems.map((report) => (
                     <div
-                        key={caseItem.id}
+                        key={report.title}
                         className="p-4 border rounded-lg shadow hover:shadow-lg cursor-pointer transition duration-200 bg-white"
-                        onClick={() => onSelectCase(caseItem)}
+                        onClick={() => onSelectCase(report)}
                     >
-                        <h3 className="text-lg font-semibold mb-2">{caseItem.title}</h3>
-                        <p className="text-sm text-gray-600">{`Case ID: ${caseItem.id}`}</p>
-                        <p className="text-sm">{`Agency: ${caseItem.agencyName}`}</p>
-                        <p className="text-sm">{`Location: ${caseItem.location}`}</p>
-                        <p className="text-sm">{`Date Reported: ${caseItem.dateReported}`}</p>
+                        <h3 className="text-lg font-semibold mb-2">{report.title}</h3>
+                        <p className="text-sm text-gray-600">{`Report Title: ${report.title}`}</p>
+                        <p className="text-sm">{`Location: ${report.location}`}</p>
+                        <p className="text-sm">{`Date Reported: ${report.dateReported}`}</p>
                         <div className={`inline-block px-2 py-1 rounded-full text-sm mt-2 
-                            ${caseItem.statusUpdate === 'Resolved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
-                            {caseItem.statusUpdate}
+                            ${report.statusUpdate === 'Resolved' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
+                            {report.statusUpdate}
                         </div>
                     </div>
                 ))}
@@ -170,7 +163,6 @@ const CaseList = ({ onSelectCase }) => {
     );
 };
 
-// Rest of the components remain the same
 const CaseDetails = ({ caseDetails, onBack }) => {
     return (
         <div className="case-details p-2 border rounded-lg shadow mt-1 bg-white">
@@ -178,19 +170,19 @@ const CaseDetails = ({ caseDetails, onBack }) => {
                 Back to List
             </button>
             <h3 className="text-xl font-semibold mb-2">{caseDetails.title}</h3>
-            <p>{`Case ID: ${caseDetails.id}`}</p>
-            <p>{`Agency Name: ${caseDetails.agencyName}`}</p>
+            <p>{`Report Title: ${caseDetails.title}`}</p>
             <p>{`Date Reported: ${caseDetails.dateReported}`}</p>
             <p>{`Location: ${caseDetails.location}`}</p>
-            <p>{`Status Update: ${caseDetails.statusUpdate}`}</p>
-            <p>{`Actions Taken: ${caseDetails.actionsTaken}`}</p>
+            <p>{`Status: ${caseDetails.status}`}</p>
+            <p>{`Description: ${caseDetails.description}`}</p>
             <p>{`Notes: ${caseDetails.notes}`}</p>
             <div className="case-images my-2">
                 <h4 className="font-semibold">Images</h4>
                 <div className="grid grid-cols-2 gap-2">
-                    {caseDetails.images.map((image, idx) => (
-                        <img key={idx} src={image} alt={`Case ${caseDetails.id} - img ${idx}`} className="w-36 h-36 rounded" />
-                    ))}
+                    {/* Render the image if it exists */}
+                    {caseDetails.image && (
+                        <img src={caseDetails.image} alt={`Case ${caseDetails.title} - image`} className="w-36 h-36 rounded" />
+                    )}
                 </div>
             </div>
             <div className="actions mt-2">

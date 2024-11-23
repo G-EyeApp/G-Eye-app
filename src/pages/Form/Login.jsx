@@ -1,27 +1,18 @@
 import React, { useState } from 'react';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { apiLogin } from '../../services/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AgencyLogin = () => {
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
-  };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
 
     try {
       const response = await apiLogin({ email, password });
@@ -32,7 +23,10 @@ const AgencyLogin = () => {
         // Toast for successful login
         toast.success('You have logged in successfully!');
 
-        navigate('/dashboard'); 
+        // Delay navigation to dashboard
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 6000); // 2 seconds delay
       }
     } catch (error) {
       console.error("Login failed:", error);
@@ -58,6 +52,8 @@ const AgencyLogin = () => {
               className="w-full p-2 border-0 focus:outline-none"
               placeholder='Enter Your Email'
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)} // Directly handle input changes here
             />
           </div>
         </label>
@@ -73,6 +69,8 @@ const AgencyLogin = () => {
               className="w-full p-2 border-0 focus:outline-none"
               placeholder='Enter Password'
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)} // Directly handle input changes here
             />
           </div>
         </label>
@@ -83,6 +81,8 @@ const AgencyLogin = () => {
             name="rememberMe"
             id="rememberMe"
             className="mr-2"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)} // Directly handle checkbox changes here
           />
           Remember Me
         </label>

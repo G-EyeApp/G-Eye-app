@@ -3,7 +3,8 @@ import { FaBuilding, FaPhone, FaEnvelope, FaLock } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { apiSignup } from '../../services/auth';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';  // Import Toastify styles
+import 'react-toastify/dist/ReactToastify.css';  // Ensure this import is at the top
+
 
 const AgencySignup = () => {
   const [loading, setLoading] = useState(false);
@@ -20,9 +21,7 @@ const AgencySignup = () => {
       const email = formDataObj.get("email");
       const password = formDataObj.get("password");
       const agencyAddress = formDataObj.get("agencyAddress");
-      const tinNumber = formDataObj.get("tinNumber");
-      // const confirmPassword = formDataObj.get("confirmPassword");
-      // const termsAccepted = formDataObj.get("termsAccepted") === "on"; // checkbox handling
+      const tinNumber = formDataObj.get("tinNumber")
 
       const payload = {
         agencyName,
@@ -31,30 +30,24 @@ const AgencySignup = () => {
         password,
         agencyAddress,
         tinNumber,
-        // confirmPassword, // Include this if needed for validation
-        // termsAccepted,
       };
 
       const response = await apiSignup(payload);
 
-      // Success Toast
-      toast.success('Registered Successfully! You have successfully created an account.', {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-      navigate("/login");
-    } catch (error) {
-      // Error Toast
-      toast.error(error.response?.data?.message || 'Registration Failed! Something went wrong!', {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+       // Toast for successful login
+       toast.success('You have logged in successfully!');
+
+     }
+    catch (error) {
+     console.error("Login failed:", error);
+     
+     // Toast for login failure
+     toast.error('Incorrect email or password. Please try again.');
+   }
+ };
 
   return (
     <div className='signup p-20 bg-gray-300'>
-      <ToastContainer />
       <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg backdrop-blur-xl bg-white/30">
         <h2 className="text-xl font-bold mb-4 text-center text-green-700">Agency Signup</h2>
 
@@ -177,6 +170,7 @@ const AgencySignup = () => {
           </Link>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };
