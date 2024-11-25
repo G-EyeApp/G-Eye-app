@@ -53,7 +53,7 @@ const Navbar = () => {
               Reports
             </Link>
             <Link to="/signup" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition hover:underline font-bold">
-              Dashboard
+              Agencies
             </Link>
             <Link to="/about" className="text-gray-700 dark:text-gray-300 hover:text-green-600 transition hover:underline font-bold">
               About
@@ -109,7 +109,7 @@ const Navbar = () => {
             Reports
           </Link>
           <Link to="/signup" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-green-600 transition">
-            Dashboard
+            Agencies
           </Link>
           <Link to="/about" className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-green-600 transition">
             About

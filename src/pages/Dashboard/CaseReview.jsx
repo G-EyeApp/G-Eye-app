@@ -16,7 +16,7 @@ const CaseList = ({ onSelectCase }) => {
     const getAgencyReports = async () => {
         try {
             const token = localStorage.getItem('token'); // or however you store your token
-            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/agents/reports?=0`, {
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/agents/reports`, {
                 headers: {
                     Authorization: `Bearer ${token}`, // Adjust this based on your API's requirements
                 },

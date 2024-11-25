@@ -35,7 +35,7 @@ const AgencySignup = () => {
       const response = await apiSignup(payload);
 
        // Toast for successful login
-       toast.success('You have logged in successfully!');
+       toast.success('You have signed up successfully!');
 
      }
     catch (error) {
